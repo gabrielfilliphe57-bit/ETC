@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b0a">
+<meta name="description" content="ETC — seu organizador pessoal de jogos e scripts.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>ETC | Neon Control</title>
+<style>
+:root{color-scheme:dark;--bg:#060908;--panel:#0d1512;--panel2:#101d17;--line:#1d3c2c;--green:#29f58b;--cyan:#27d9d0;--red:#ff4d67;--muted:#91a69a;--white:#effff5}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#16452d 0%,#09130e 38%,#050807 75%);color:var(--white);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;padding:env(safe-area-inset-top) 0 calc(104px + env(safe-area-inset-bottom));overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;background-image:linear-gradient(#31f28b12 1px,transparent 1px),linear-gradient(90deg,#31f28b12 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent 75%)}
+header{position:sticky;top:0;z-index:4;padding:18px 18px 14px;background:#060908d9;backdrop-filter:blur(18px);border-bottom:1px solid #1b3d2b;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:11px}.brandmark{width:39px;height:39px;filter:drop-shadow(0 0 9px #29f58b88)}.brandname{font-size:25px;letter-spacing:4px;font-weight:950;line-height:1;color:var(--green);text-shadow:0 0 18px #29f58b77}.tagline{font-size:9px;letter-spacing:2px;color:#91bba3;margin-top:5px}.status{font-size:9px;letter-spacing:1.5px;color:var(--green);border:1px solid #226b45;padding:7px 10px;border-radius:30px;background:#0b2116;box-shadow:0 0 13px #29f58b20}
+main{max-width:720px;margin:auto;padding:0 16px}.section{margin:22px 0}.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.section-title{font-size:11px;letter-spacing:2px;font-weight:850;color:#b5d9c2}.section-title:before{content:"";display:inline-block;width:6px;height:6px;background:var(--green);box-shadow:0 0 10px var(--green);margin-right:9px;transform:rotate(45deg)}.micro{font-size:10px;color:var(--muted)}
+.app-card,.chosen,.search-wrap,.feature{background:linear-gradient(130deg,#102019,#0a110d);border:1px solid #1b4a31;border-radius:17px;box-shadow:inset 0 0 24px #1bf17b08,0 8px 25px #0005}
+.app-card{padding:13px;display:flex;align-items:center;gap:13px}.roblox-logo{width:45px;height:45px;flex:none;filter:drop-shadow(0 0 8px #ffffff22)}.grow{flex:1;min-width:0}.app-card strong{font-size:14px}.muted{font-size:11px;color:var(--muted);margin-top:4px}.tiny-tag{font-size:9px;color:var(--green);letter-spacing:1px;border:1px solid #1c6540;border-radius:20px;padding:6px 8px}
+.games{display:flex;gap:12px;overflow-x:auto;padding:3px 2px 13px;scroll-snap-type:x mandatory;scrollbar-width:none;touch-action:pan-x}.games::-webkit-scrollbar{display:none}.game{flex:0 0 174px;scroll-snap-align:start;padding:0;border:1px solid #234331;background:#0b130f;border-radius:16px;overflow:hidden;text-align:left;color:var(--white);cursor:pointer;transition:.18s;position:relative}.game.active{border:1px solid var(--green);box-shadow:0 0 0 1px #29f58b,0 0 22px #29f58b30}.game img{width:100%;height:102px;display:block;object-fit:cover;background:linear-gradient(120deg,#123b28,#101a14)}.game .game-title{padding:10px 11px 11px;font-size:12px;font-weight:800}.game .game-sub{font-size:9px;color:var(--muted);font-weight:500;margin-top:4px}.selected{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:linear-gradient(110deg,#10251a,#0a110d);border:1px solid #1d5838;box-shadow:0 0 18px #29f58b10}.selected .script-symbol{width:38px;height:38px;border:1px solid #276a45;border-radius:12px;display:grid;place-items:center;color:var(--green);font-size:17px;box-shadow:inset 0 0 13px #29f58b18}.selected strong{font-size:13px}.outline-btn{background:#0c1b13;border:1px solid #286442;border-radius:11px;padding:10px 12px;color:#a7f8c7;font-size:10px;font-weight:850;letter-spacing:.7px}
+.search-wrap{padding:12px 14px;display:flex;gap:10px;align-items:center}.search-wrap svg{width:17px;stroke:var(--green)}.search-wrap input{width:100%;background:none;border:0;outline:0;color:white;font:inherit;font-size:13px}
+.feature{padding:14px;display:flex;gap:12px;align-items:center}.feature-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:var(--cyan);border:1px solid #1c6863;box-shadow:0 0 14px #27d9d022;font-size:17px}.feature strong{font-size:12px}.feature p{margin:4px 0 0;font-size:10px;color:var(--muted);line-height:1.45}
+.bottom{position:fixed;z-index:5;bottom:0;left:0;right:0;max-width:720px;margin:auto;padding:13px 16px calc(13px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#06090800,#060908 24%);display:grid;gap:9px}.start{border:1px solid #61ffad;background:linear-gradient(100deg,#27f58b,#11b86a);color:#03150a;border-radius:14px;padding:16px;font-size:13px;letter-spacing:1.4px;font-weight:950;box-shadow:0 0 23px #29f58b44,inset 0 1px #ffffff70}.add{border:1px solid #8e3444;background:linear-gradient(100deg,#d93656,#8f1f3a);color:white;border-radius:14px;padding:14px;font-size:11px;letter-spacing:1.2px;font-weight:900;box-shadow:0 0 18px #ff4d6725}
+.fab{position:fixed;right:17px;bottom:164px;z-index:6;border:1px solid #5dffab;background:#07150d;color:var(--green);border-radius:50px;padding:12px 15px;font-size:10px;letter-spacing:1px;font-weight:900;box-shadow:0 0 18px #29f58b66;touch-action:none}
+.modal{position:fixed;inset:0;background:#000c;backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;z-index:20}.modal.show{display:flex}.sheet{width:100%;max-width:720px;max-height:88vh;overflow:auto;background:linear-gradient(145deg,#101c15,#070b09);border:1px solid #286440;border-bottom:0;border-radius:23px 23px 0 0;padding:18px 16px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -8px 45px #29f58b16}.sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.sheet h3{margin:0;font-size:17px;letter-spacing:.3px}.close{border:1px solid #31533e;background:#111e16;color:white;border-radius:10px;padding:7px 12px;font-size:18px}.script-row{display:flex;align-items:center;gap:11px;margin:9px 0;padding:12px;border:1px solid #1e4930;background:#0c1510;border-radius:13px}.script-row .grow{flex:1}.script-row strong{font-size:12px}.script-row small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.script-row button{border:1px solid #2b754b;background:#102719;color:#a5f5c3;border-radius:9px;padding:9px;font-size:9px;font-weight:900}
+label{display:block;margin:13px 0 6px;color:#a8c2b0;font-size:10px;letter-spacing:.7px}input,textarea,select{width:100%;border:1px solid #28513a;border-radius:11px;background:#09110c;color:white;padding:12px;font:inherit;font-size:13px;outline:none}textarea{min-height:90px;resize:vertical}.actions{display:flex;gap:9px;margin-top:16px}.actions>*{flex:1}.save{border:0;border-radius:11px;background:var(--green);color:#03150a;font-weight:900;padding:13px}.cancel{border:1px solid #35513e;background:#101a13;color:white;border-radius:11px;padding:13px}.empty{text-align:center;color:var(--muted);padding:20px;font-size:12px}.footnote{font-size:10px;color:#82978a;line-height:1.5;margin:13px 2px}
+@media(min-width:600px){.game{flex-basis:190px}.game img{height:116px}.bottom{padding-left:24px;padding-right:24px}}
+</style>
+</head>
+<body>
+<header><div class="brand">
+<svg class="brandmark" viewBox="0 0 100 100" aria-label="ETC"><path fill="#29f58b" d="M50 4 96 50 50 96 4 50Z"/><path fill="#06100a" d="M50 20 80 50 50 80 20 50Z"/><path fill="#29f58b" d="M50 34 66 50 50 66 34 50Z"/></svg>
+<div><div class="brandname">ETC</div><div class="tagline">NEON CONTROL SYSTEM</div></div></div><span class="status">● SISTEMA PRONTO</span></header>
+<main>
+<section class="section">
+<div class="section-head"><div class="section-title">APLICATIVO SELECIONADO</div><span class="micro">01 / APP</span></div>
+<div class="app-card">
+<svg class="roblox-logo" viewBox="0 0 100 100" role="img" aria-label="Logo Roblox"><rect x="14" y="14" width="72" height="72" rx="8" transform="rotate(15 50 50)" fill="#f4fff7"/><rect x="39" y="39" width="22" height="22" transform="rotate(15 50 50)" fill="#09110c"/></svg>
+<div class="grow"><strong>Roblox</strong><div class="muted">Aplicativo de destino</div></div><span class="tiny-tag">SELECIONADO</span>
+</div>
+</section>
+<section class="section">
+<div class="section-head"><div class="section-title">ESCOLHA SEU JOGO</div><span class="micro">DESLIZE ← →</span></div>
+<div class="games" id="games">
+<button class="game active" data-game="Murder Mystery 2" data-place="142823291" data-url="https://www.roblox.com/games/142823291/"><img alt="Murder Mystery 2" data-place-img="142823291"><div class="game-title">Murder Mystery 2<div class="game-sub">ROBLOX EXPERIENCE</div></div></button>
+<button class="game" data-game="Brookhaven RP" data-place="4924922222" data-url="https://www.roblox.com/games/4924922222/"><img alt="Brookhaven RP" data-place-img="4924922222"><div class="game-title">Brookhaven RP<div class="game-sub">ROBLOX EXPERIENCE</div></div></button>
+<button class="game" data-game="Grow a Garden" data-place="126884695634066" data-url="https://www.roblox.com/games/126884695634066/"><img alt="Grow a Garden" data-place-img="126884695634066"><div class="game-title">Grow a Garden<div class="game-sub">ROBLOX EXPERIENCE</div></div></button>
+<button class="game" data-game="Steal a Brainrot" data-place="109983668079237" data-url="https://www.roblox.com/games/109983668079237/"><img alt="Steal a Brainrot" data-place-img="109983668079237"><div class="game-title">Steal a Brainrot<div class="game-sub">ROBLOX EXPERIENCE</div></div></button>
+<button class="game" data-game="Outro / não confirmado" data-place="" data-url="https://www.roblox.com/"><img alt="Roblox" src="icon.svg"><div class="game-title">Outros jogos<div class="game-sub">ABRIR ROBLOX</div></div></button>
+</div>
+</section>
+<section class="section">
+<div class="section-head"><div class="section-title">SCRIPT SELECIONADO</div><span class="micro" id="scriptCount">03 DISPONÍVEIS</span></div>
+<div class="selected"><div class="script-symbol">S</div><div class="grow"><strong id="selectedName">ThunderX HUB</strong><div class="muted" id="selectedGame">Murder Mystery 2</div></div><button class="outline-btn" id="chooseScript">VER SCRIPTS</button></div>
+</section>
+<section class="section">
+<div class="section-head"><div class="section-title">BUSCA RÁPIDA</div><span class="micro">LOCALIZAR</span></div>
+<div class="search-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="search" placeholder="Pesquisar jogos ou scripts..."></div>
+</section>
+<section class="section">
+<div class="section-head"><div class="section-title">RECURSO EXTRA</div><span class="micro">NOVO</span></div>
+<div class="feature"><div class="feature-icon">☆</div><div class="grow"><strong>FAVORITOS</strong><p>Marque seus scripts preferidos para encontrá-los rapidamente na lista de seleção.</p></div><span class="tiny-tag">★</span></div>
+</section>
+<p class="footnote">ETC é um organizador pessoal. O botão iniciar abre a página do jogo no Roblox; o Android pode abrir o app se estiver instalado. O ETC não injeta nem executa códigos de terceiros.</p>
+</main>
+<button class="fab" id="fab">ETC • ATALHO</button>
+<div class="bottom"><button class="start" id="startBtn">INICIAR NO ROBLOX&nbsp; ↗</button><button class="add" id="addBtn">＋ &nbsp; ADICIONAR SCRIPT NOVO</button></div>
+<div class="modal" id="scriptModal"><div class="sheet"><div class="sheet-head"><h3>Selecionar script</h3><button class="close" data-close="scriptModal">×</button></div><p class="muted" id="modalGame"></p><div id="scriptList"></div><p class="footnote">Os registros servem para organização. O ETC não executa scripts de terceiros.</p></div></div>
+<div class="modal" id="addModal"><div class="sheet"><div class="sheet-head"><h3>Adicionar script novo</h3><button class="close" data-close="addModal">×</button></div><label>NOME DO SCRIPT</label><input id="newName" placeholder="Ex.: Meu script"><label>JOGO</label><select id="newGame"><option>Murder Mystery 2</option><option>Brookhaven RP</option><option>Grow a Garden</option><option>Steal a Brainrot</option><option>Outro / não confirmado</option></select><label>ANOTAÇÃO OU LINK DE REFERÊNCIA (OPCIONAL)</label><textarea id="newInfo" placeholder="Adicione uma descrição ou referência"></textarea><div class="actions"><button class="cancel" data-close="addModal">CANCELAR</button><button class="save" id="saveScript">SALVAR</button></div></div></div>
+<script>
+const initial={
+"Murder Mystery 2":[{name:"ThunderX HUB",info:"Favoridade inicial",favorite:true},{name:"MM2 Script V4",info:"Registro salvo"},{name:"YARHM HUB",info:"Registro salvo"}],
+"Brookhaven RP":[{name:"Brookhaven — a identificar",info:"Adicione suas anotações"}],
+"Grow a Garden":[{name:"SNPWARE",info:"Jogo ainda não confirmado"}],
+"Steal a Brainrot":[{name:"Steal an Egg",info:"Jogo ainda não confirmado"}],
+"Outro / não confirmado":[{name:"RBLX V6",info:"Jogo não confirmado"},{name:"C-Freeze Trade",info:"Jogo não confirmado"},{name:"GmilerlolYT",info:"Jogo não confirmado"}]};
+let data;try{data=JSON.parse(localStorage.getItem("etcNeonScripts"))||initial}catch(e){data=initial}
+let game="Murder Mystery 2",script="ThunderX HUB",gameUrl="https://www.roblox.com/games/142823291/";
+const $=id=>document.getElementById(id);
+function list(){return data[game]||[]}
+function persist(){try{localStorage.setItem("etcNeonScripts",JSON.stringify(data))}catch(e){}}
+function update(){if(!list().some(x=>x.name===script))script=list()[0]?.name||"Nenhum cadastrado";$("selectedName").textContent=script;$("selectedGame").textContent=game;$("scriptCount").textContent=String(list().length).padStart(2,"0")+" DISPONÍVEIS";document.querySelectorAll(".game").forEach(x=>x.classList.toggle("active",x.dataset.game===game))}
+function modal(id,on){$(id).classList.toggle("show",on)}
+document.querySelectorAll(".game").forEach(el=>el.addEventListener("click",()=>{game=el.dataset.game;gameUrl=el.dataset.url;script=list()[0]?.name||"Nenhum cadastrado";update()}));
+$("chooseScript").onclick=()=>{ $("modalGame").textContent="JOGO: "+game.toUpperCase();let root=$("scriptList");root.replaceChildren();if(!list().length){let p=document.createElement("div");p.className="empty";p.textContent="Nenhum script cadastrado para este jogo.";root.append(p)}list().forEach(item=>{let row=document.createElement("div");row.className="script-row";let info=document.createElement("div");info.className="grow";let title=document.createElement("strong");title.textContent=item.name;let desc=document.createElement("small");desc.textContent=item.info||"Sem anotação";info.append(title,desc);let fav=document.createElement("button");fav.textContent=item.favorite?"★":"☆";fav.title="Alternar favorito";fav.onclick=()=>{item.favorite=!item.favorite;persist();fav.textContent=item.favorite?"★":"☆"};let choose=document.createElement("button");choose.textContent=item.name===script?"ATUAL":"SELECIONAR";choose.onclick=()=>{script=item.name;update();modal("scriptModal",false)};row.append(info,fav,choose);root.append(row)});modal("scriptModal",true)};
+$("addBtn").onclick=()=>{$("newGame").value=game;$("newName").value="";$("newInfo").value="";modal("addModal",true)};
+$("saveScript").onclick=()=>{let name=$("newName").value.trim(),g=$("newGame").value;if(!name){alert("Digite o nome do script.");return}data[g]=data[g]||[];if(data[g].some(x=>x.name.toLowerCase()===name.toLowerCase())){alert("Esse nome já existe nessa lista.");return}data[g].push({name,info:$("newInfo").value.trim()});persist();if(g===game){script=name;update()}modal("addModal",false)};
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>modal(b.dataset.close,false));
+document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)modal(m.id,false)}));
+$("search").addEventListener("input",e=>{let q=e.target.value.toLowerCase();document.querySelectorAll(".game").forEach(el=>{let g=el.dataset.game;el.hidden=!!q&&!g.toLowerCase().includes(q)&&!(data[g]||[]).some(s=>s.name.toLowerCase().includes(q))})});
+$("startBtn").onclick=()=>{window.location.href=gameUrl};
+let fab=$("fab"),drag=false,dx=0,dy=0;fab.addEventListener("pointerdown",e=>{drag=true;let r=fab.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;fab.setPointerCapture(e.pointerId)});fab.addEventListener("pointermove",e=>{if(!drag)return;fab.style.left=Math.max(4,Math.min(innerWidth-fab.offsetWidth-4,e.clientX-dx))+"px";fab.style.top=Math.max(8,Math.min(innerHeight-fab.offsetHeight-8,e.clientY-dy))+"px";fab.style.right="auto";fab.style.bottom="auto"});fab.addEventListener("pointerup",()=>drag=false);
+async function loadGameImages(){let ids=[...document.querySelectorAll("[data-place-img]")].map(x=>x.dataset.placeImg);for(let id of ids){let img=document.querySelector('[data-place-img="'+id+'"]');try{let res=await fetch("https://thumbnails.roblox.com/v1/places/gameicons?placeIds="+id+"&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false");let json=await res.json();let url=json.data?.[0]?.imageUrl;if(url)img.src=url;else img.alt+=" (imagem indisponível)"}catch(e){img.alt+=" (conecte à internet para carregar a capa)"}}}
+update();loadGameImages();
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script>
+</body></html>
